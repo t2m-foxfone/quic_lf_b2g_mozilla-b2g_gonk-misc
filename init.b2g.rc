@@ -32,6 +32,14 @@ service OOMLogger /system/bin/oom-msg-logger
     user root
     group system
 
+service nfcd /system/bin/nfcd
+    class main
+    oneshot
+    socket nfcd stream 660 nfc nfc
+    user nfc
+    group system
+
+
 on boot
     exec /system/bin/rm -r /data/local/tmp
     exec /system/bin/mkdir -p /data/local/tmp
