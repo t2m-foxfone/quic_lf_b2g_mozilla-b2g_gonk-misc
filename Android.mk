@@ -254,6 +254,7 @@ gecko-update-full:
 	shasum -a 512 $(UPDATE_PACKAGE_TARGET)
 
 GECKO_MAKE_FLAGS ?= -j16
+#Bug:597107 Added by baijian 2014-02-09 add fota lib begin
 GECKO_LIB_DEPS := \
 	libc.so \
 	libdl.so \
@@ -263,9 +264,11 @@ GECKO_LIB_DEPS := \
 	libsensorservice.so \
 	libstagefright.so \
 	libstagefright_omx.so \
+	libsuapp_d_native.so \
+	libstlport_shared.so \
 	libsysutils.so \
 	$(NULL)
-
+#Bug:597107 Added by baijian 2014-02-09 add fota lib end
 ifneq ($(wildcard external/dbus),)
 GECKO_LIB_DEPS += libdbus.so
 endif
