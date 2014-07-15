@@ -162,8 +162,9 @@ PRESERVE_B2G_WEBAPPS := 0
 
 # In user (production) builds, gaia goes in $(TARGET_OUT)/b2g/webapps
 # This flag helps us preserve the directory when cleaning out $(TARGET_OUT)/b2g
-ifneq ($(filter user userdebug, $(TARGET_BUILD_VARIANT)),)
 B2G_SYSTEM_APPS := 1
+ifneq ($(filter user userdebug, $(TARGET_BUILD_VARIANT)),)
+#B2G_SYSTEM_APPS := 1
 B2G_UPDATER ?= 1
 else
 B2G_UPDATER ?= 0
