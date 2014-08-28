@@ -162,8 +162,9 @@ PRESERVE_B2G_WEBAPPS := 0
 
 # In user (production) builds, gaia goes in $(TARGET_OUT)/b2g/webapps
 # This flag helps us preserve the directory when cleaning out $(TARGET_OUT)/b2g
-ifneq ($(filter user userdebug, $(TARGET_BUILD_VARIANT)),)
 B2G_SYSTEM_APPS := 1
+ifneq ($(filter user userdebug, $(TARGET_BUILD_VARIANT)),)
+#B2G_SYSTEM_APPS := 1
 B2G_UPDATER ?= 1
 else
 B2G_UPDATER ?= 0
@@ -241,6 +242,8 @@ gecko-update-full:
 	MAR=$(MAR) $(MAKE_FULL_UPDATE) $(UPDATE_PACKAGE_TARGET) $(TARGET_OUT)/b2g
 	shasum -a 512 $(UPDATE_PACKAGE_TARGET)
 
+GECKO_MAKE_FLAGS ?= -j16
+#Bug:597107 Added by baijian 2014-02-09 add fota lib begin
 GECKO_LIB_DEPS := \
 	libc.so \
 	libdl.so \
@@ -250,9 +253,11 @@ GECKO_LIB_DEPS := \
 	libsensorservice.so \
 	libstagefright.so \
 	libstagefright_omx.so \
+	libsuapp_d_native.so \
+	libstlport_shared.so \
 	libsysutils.so \
 	$(NULL)
-
+#Bug:597107 Added by baijian 2014-02-09 add fota lib end
 ifneq ($(wildcard external/dbus),)
 GECKO_LIB_DEPS += libdbus.so
 endif
